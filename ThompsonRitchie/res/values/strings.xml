@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Thompson Ritchie</string>
+    <string name="action_settings">Settings</string>
+    <string name="ken">Ken Thompson</string>
+    <string name="ken_des">A photo of Ken Thompson wearing large rimmed glasses and a magnificent UNIX wizard beard</string>
+    <string name="ken_con">Kenneth Lane Thompson (born February 4, 1943) is an American pioneer of computer science. Having worked at Bell Labs for most of his career, Thompson designed and implemented the original Unix operating system. Since 2006, Thompson works at Google, where he co-invented the Go programming language. UNIX remains an important technology through Mac OS X and the *BSD operating systems, as well as Linux which is a UNIX clone. From Wikipedia</string>
+    <string name="den">Dennis Ritchie</string>
+    <string name="den_des">A photo of Dennis Ritchie being awarded the National Medal of Technology by Bill Clinton </string>
+    <string name="den_con">Dennis MacAlistair Ritchie (September 9, 1941 – c. October 12, 2011) was an American computer scientist who &quot;helped shape the digital era.&quot; He created the C programming language and, with long-time colleague Ken Thompson, the Unix operating system. C and its variants remain popular systems programming languages even today, and many languages were inspired by it. From Wikipedia</string>
+
+</resources>

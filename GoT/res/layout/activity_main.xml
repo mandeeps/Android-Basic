@@ -19,7 +19,9 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
         android:text="@string/hello_world" />
 
     <Button
@@ -27,7 +29,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView1"
-        android:layout_alignRight="@+id/textView1"
+        android:layout_marginRight="13dp"
+        android:layout_toLeftOf="@+id/textView1"
         android:onClick="openBC"
         android:text="HBO" />
 
@@ -36,8 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView1"
-        android:layout_alignRight="@+id/imageView1"
-        android:layout_marginRight="29dp"
+        android:layout_toRightOf="@+id/textView1"
         android:onClick="openFB"
         android:text="Westeros" />
 

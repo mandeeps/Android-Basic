@@ -16,6 +16,7 @@ public class MainActivity extends Activity {
 		web = (WebView) findViewById(R.id.webView1);
 		web.getSettings().setBuiltInZoomControls(true);
 		web.getSettings().setJavaScriptEnabled(true);
+		web.getSettings().setDomStorageEnabled(true);
 		web.loadUrl("file:///android_asset/index.html");
 	}
 

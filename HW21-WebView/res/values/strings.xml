@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HW21-War</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_two">HW21-NASA</string>
+    <string name="title_activity_three">HW21-Roundball</string>
+    <string name="title_activity_four">HW21-Jabberwocky</string>
+
+</resources>

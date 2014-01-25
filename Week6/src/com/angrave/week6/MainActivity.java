@@ -2,6 +2,7 @@ package com.angrave.week6;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -39,7 +40,7 @@ public class MainActivity extends Activity {
 		String phone = mPhone.getText().toString();
 		String name = mName.getText().toString();
 		int position = 0;
-
+		
 		try {
 			position = email.indexOf("@");
 			if (position == -1) {
@@ -61,6 +62,10 @@ public class MainActivity extends Activity {
 		button.startAnimation(anim);
 		button.setVisibility(View.INVISIBLE);
 		Toast.makeText(this.getApplicationContext(), R.string.app_name, Toast.LENGTH_LONG).show();
+		Intent i = new Intent(Intent.ACTION_SEND);
+		i.setType("text/plain");
+		i.putExtra(Intent.EXTRA_TEXT, "What an app");
+		startActivity(i);
 	}
 
 }

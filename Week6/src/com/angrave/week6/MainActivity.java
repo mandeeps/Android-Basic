@@ -1,5 +1,6 @@
 package com.angrave.week6;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -62,10 +63,19 @@ public class MainActivity extends Activity {
 		button.startAnimation(anim);
 		button.setVisibility(View.INVISIBLE);
 		Toast.makeText(this.getApplicationContext(), R.string.app_name, Toast.LENGTH_LONG).show();
-		Intent i = new Intent(Intent.ACTION_SEND);
-		i.setType("text/plain");
-		i.putExtra(Intent.EXTRA_TEXT, "What an app");
-		startActivity(i);
+		
+		Intent i = new Intent(Intent.ACTION_SENDTO,
+				Uri.fromParts("mailtp", "someone@somewhere", null)
+			);
+		i.putExtra(Intent.EXTRA_SUBJECT, "important news");
+		i.putExtra(Intent.EXTRA_TEXT, name + " says " + comments);
+		startActivity(Intent.createChooser(i, "Select your email app"));
+		
+//		Intent i = new Intent(Intent.ACTION_SEND);
+//		i.setType("text/plain");
+//		i.setData(Uri.parse(phone));
+//		i.putExtra("sms_body", "What an app");
+//		startActivity(i);
 	}
 
 }

@@ -1,9 +1,13 @@
 package com.angrave.week6;
 
+import java.util.Locale;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -12,7 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements TextWatcher {
 	private EditText mName;
 	private EditText mPhone;
 	private EditText mEmail;
@@ -26,7 +30,10 @@ public class MainActivity extends Activity {
 		mPhone = (EditText) findViewById(R.id.phone);
 		mEmail = (EditText) findViewById(R.id.email);
 		mComments = (EditText) findViewById(R.id.comments);
+		mComments.addTextChangedListener(this);
 	}
+
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,6 +83,37 @@ public class MainActivity extends Activity {
 		i.setData(Uri.parse("sms:" + phone));
 		i.putExtra("sms_body", "What an app");
 		startActivity(i);
+	}
+	
+	@Override
+	public void afterTextChanged(Editable s) {
+		String comments = s.toString();
+		String button = getString(R.string.button);
+		boolean valid = comments.length() > 0 && comments.toLowerCase().indexOf(button) == -1;
+		View view = findViewById(R.id.imageButton1);
+		boolean isVisible = view.getVisibility() == View.VISIBLE;
+		if (isVisible == valid) {
+			return;
+		}
+		Animation anim;
+		if (valid) {
+			view.setVisibility(View.VISIBLE);
+			anim = AnimationUtils.makeInAnimation(this, true);
+		}
+		else {
+			anim = AnimationUtils.makeOutAnimation(this, true);
+			view.setVisibility(View.INVISIBLE);
+		}
+		view.startAnimation(anim);
+	}
+
+	@Override
+	public void beforeTextChanged(CharSequence s, int arg1,
+			int arg2, int arg3) {
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int arg1, int arg2, int arg3) {
 	}
 
 }

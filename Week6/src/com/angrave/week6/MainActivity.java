@@ -72,7 +72,7 @@ public class MainActivity extends Activity implements TextWatcher {
 		Toast.makeText(this.getApplicationContext(), R.string.app_name, Toast.LENGTH_LONG).show();
 		
 /*		Intent i = new Intent(Intent.ACTION_SENDTO,
-				Uri.fromParts("mailtp", "someone@somewhere", null)
+				Uri.fromParts("mailto", "someone@somewhere", null)
 			);
 		i.putExtra(Intent.EXTRA_SUBJECT, "important news");
 		i.putExtra(Intent.EXTRA_TEXT, name + " says " + comments);

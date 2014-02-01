@@ -6,7 +6,6 @@ import java.io.InputStream;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,7 +14,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -78,7 +76,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				
 			}
 		};
-		findViewById(R.id.button1).setOnClickListener(listener );
+		findViewById(R.id.button1).setOnClickListener(listener);
 	}
 
 	@Override

@@ -1,19 +1,24 @@
 package com.example.angraveweek7;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.text.TextPaint;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -113,8 +118,21 @@ public class MainActivity extends Activity implements OnClickListener {
 				options.inJustDecodeBounds = false;
 				options.inSampleSize = sample;
 				stream = getContentResolver().openInputStream(uri);
-				mBitmap = BitmapFactory.decodeStream(stream, null, options);
+				Bitmap bm = BitmapFactory.decodeStream(stream, null, options);
 				stream.close();
+				
+				if (mBitmap != null) {
+					mBitmap.recycle();
+				}
+				mBitmap = Bitmap.createBitmap(bm.getWidth(), bm.getHeight(), Bitmap.Config.ARGB_8888);
+				Canvas c = new Canvas(mBitmap);
+				c.drawBitmap(bm, 0, 0, null);
+				TextPaint tp = new TextPaint();
+				tp.setTextSize(bm.getHeight()/2);
+				tp.setColor(0x800000ff);
+				c.drawText("Got it", 0, bm.getHeight()/2, tp);
+				
+				bm.recycle();
 				
 				ImageView v = (ImageView) findViewById(R.id.imageView1);
 				v.setImageBitmap(mBitmap);
@@ -150,5 +168,35 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	}
 
+	public void saveAndShare(View v) {
+		if (mBitmap == null) {
+			return;
+		}
+		File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+		Log.d(TAG, "saveandshare path = " + path);
+		path.mkdirs();
+		String filename = "Image_" + System.currentTimeMillis() + ".jpg";
+		File file = new File(path, filename);
+		FileOutputStream stream;
+		try {
+			stream = new FileOutputStream(file);
+			mBitmap.compress(CompressFormat.JPEG, 90, stream);
+			stream.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Log.e(TAG, "error save and share");
+			return;
+		}
+		Uri uri = Uri.fromFile(file);
+		Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+		intent.setData(uri);
+		sendBroadcast(intent);
+
+		Intent share = new Intent(Intent.ACTION_SEND);
+		share.setType("image/jpeg");
+		share.putExtra(Intent.EXTRA_STREAM, uri);
+		startActivity(Intent.createChooser(share, "share using"));
+	}
+	
 
 }

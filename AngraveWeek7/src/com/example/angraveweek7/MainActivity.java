@@ -1,6 +1,7 @@
 package com.example.angraveweek7;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import android.net.Uri;
@@ -93,15 +94,38 @@ public class MainActivity extends Activity implements OnClickListener {
 		if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
 			Uri uri = data.getData();
 			Toast.makeText(getApplicationContext(), uri.toString(), Toast.LENGTH_LONG).show();
-			InputStream stream;
+			
 			try {
+				InputStream stream = getContentResolver().openInputStream(uri);
+				BitmapFactory.Options options = new BitmapFactory.Options();
+				options.inJustDecodeBounds = true;
+				mBitmap = BitmapFactory.decodeStream(stream,null,options);
+				int w = options.outWidth;
+				int h = options.outHeight;
+				Log.d(TAG, "Decoding bitmap" + w + "x" + h);
+				stream.close();
+				
+				int displayW = getResources().getDisplayMetrics().widthPixels;
+				int displayH = getResources().getDisplayMetrics().heightPixels;
+				
+				int sample = 1;
+				while (w / sample > displayW * sample || h / sample > displayH * sample) {
+					sample = sample * 2;
+				}
+				options.inJustDecodeBounds = false;
+				options.inSampleSize = sample;
 				stream = getContentResolver().openInputStream(uri);
-				mBitmap = BitmapFactory.decodeStream(stream);
+				mBitmap = BitmapFactory.decodeStream(stream, null, options);
+				stream.close();
+				
 				ImageView v = (ImageView) findViewById(R.id.imageView1);
 				v.setImageBitmap(mBitmap);
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				Log.e("TAG", "exception in try/catch");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
 		}

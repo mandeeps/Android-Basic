@@ -17,25 +17,20 @@
         android:src="@raw/grumpy" />
 
     <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button3"
+        android:ems="10"
+        android:text="I Made an App Once." />
+    
+    <EditText
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText1"
         android:ems="10"
         android:text=" It Was Awful." />
-
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button3"
-        android:layout_alignLeft="@+id/editText2"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:text="I Made an App Once." >
-
-        <requestFocus />
-    </EditText>
 
     <Button
         android:id="@+id/button2"

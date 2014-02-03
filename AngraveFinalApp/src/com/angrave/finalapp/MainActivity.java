@@ -8,6 +8,8 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint.Align;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -21,10 +23,19 @@ public class MainActivity extends Activity {
 	private Bitmap bmp;
 	private Canvas c;
 	private Bitmap grumpy;
+	private TextPaint tp;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		tp = new TextPaint();		
+		tp.setTextSize(38);
+		tp.setShadowLayer(30, 0, 0, Color.WHITE);
+		tp.setColor(Color.BLACK);
+		tp.setTextAlign(Align.CENTER);
+
+		
 		setContentView(R.layout.activity_main);
 	}
 
@@ -36,18 +47,20 @@ public class MainActivity extends Activity {
 	}
 	
 	public void writeText(View view) {
-		String text = ((EditText) findViewById(R.id.editText1)).getText().toString();
-		
 		grumpy = BitmapFactory.decodeResource(getResources(), R.raw.grumpy);
 		bmp = Bitmap.createBitmap(grumpy.getWidth(), grumpy.getHeight(), Bitmap.Config.ARGB_8888);
 		
 		c = new Canvas(bmp);
 		c.drawBitmap(grumpy, 0, 0, null);
 		
-		TextPaint tp = new TextPaint();
-		tp.setTextSize(44);
-		tp.setColor(0xFF000000);
-		c.drawText(text, 20, bmp.getHeight()/12, tp);
+		String text1 = ((EditText) findViewById(R.id.editText1)).getText().toString();
+		String text2 = ((EditText) findViewById(R.id.editText2)).getText().toString();
+		c.drawText(text1, c.getWidth()/2, 50, tp);
+		c.drawText(text2, c.getWidth()/2, bmp.getHeight() -20, tp);
+		c.drawText(text1, c.getWidth()/2, 50, tp);
+		c.drawText(text2, c.getWidth()/2, bmp.getHeight() -20, tp);
+		c.drawText(text1, c.getWidth()/2, 50, tp);
+		c.drawText(text2, c.getWidth()/2, bmp.getHeight() -20, tp);
 		
 		((ImageView) findViewById(R.id.imageView1)).setImageBitmap(bmp);
 	}

@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="18" />
+    <uses-permission android:maxSdkVersion="18" android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -15,7 +16,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.angrave.finalapp.MainActivity"
-            android:label="@string/app_name" 
+            android:label="Create A Meme" 
             android:configChanges="orientation" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -42,8 +42,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/imageView1"
+        android:layout_alignBottom="@+id/editText2"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/button1"
+        android:layout_toRightOf="@+id/editText2"
         android:onClick="shareMeme"
         android:text="Share" />
 
@@ -52,8 +54,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
+        android:layout_alignBottom="@+id/editText1"
+        android:layout_alignLeft="@+id/button2"
         android:layout_alignRight="@+id/imageView1"
+        android:layout_alignTop="@+id/editText1"
         android:onClick="writeText"
         android:text="Write" />
 

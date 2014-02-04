@@ -1,7 +1,10 @@
 package com.angrave.finalapp;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -30,11 +33,13 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		tp = new TextPaint();		
-		tp.setTextSize(38);
+		tp.setTextSize(46);
 		tp.setShadowLayer(30, 0, 0, Color.WHITE);
 		tp.setColor(Color.BLACK);
 		tp.setTextAlign(Align.CENTER);
-
+		grumpy = BitmapFactory.decodeResource(getResources(), R.raw.grumpy);
+		bmp = Bitmap.createBitmap(grumpy.getWidth(), grumpy.getHeight(), Bitmap.Config.ARGB_8888);
+		
 		setContentView(R.layout.activity_main);
 	}
 
@@ -46,14 +51,14 @@ public class MainActivity extends Activity {
 	}
 	
 	public void writeText(View view) {
-		grumpy = BitmapFactory.decodeResource(getResources(), R.raw.grumpy);
-		bmp = Bitmap.createBitmap(grumpy.getWidth(), grumpy.getHeight(), Bitmap.Config.ARGB_8888);
-		
 		c = new Canvas(bmp);
 		c.drawBitmap(grumpy, 0, 0, null);
 		
 		String text1 = ((EditText) findViewById(R.id.editText1)).getText().toString();
 		String text2 = ((EditText) findViewById(R.id.editText2)).getText().toString();
+		
+		// Draw text several times because I don't know how
+		// to increase opacity of text shadowing to improve legibility
 		c.drawText(text1, c.getWidth()/2, 50, tp);
 		c.drawText(text2, c.getWidth()/2, bmp.getHeight() -20, tp);
 		c.drawText(text1, c.getWidth()/2, 50, tp);
@@ -64,22 +69,19 @@ public class MainActivity extends Activity {
 		((ImageView) findViewById(R.id.imageView1)).setImageBitmap(bmp);
 	}
 	
-	public void shareMeme(View view) {
-		if (bmp == null) {
-			return;
-		}
+	public void shareMeme(View view) throws IOException {
 		File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 		path.mkdirs();
-		String filename = "Image_" + System.currentTimeMillis() + ".jpg";
+		String filename = "GrumpyCat_" + System.currentTimeMillis() + ".jpg";
 		File file = new File(path, filename);
-		FileOutputStream stream;
+		FileOutputStream stream = null;
+		
 		try {
 			stream = new FileOutputStream(file);
-			bmp.compress(CompressFormat.JPEG, 90, stream);
+			bmp.compress(CompressFormat.JPEG, 85, stream);
 			stream.close();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			return;
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
 		}
 
 		Uri uri = Uri.fromFile(file);
@@ -90,7 +92,7 @@ public class MainActivity extends Activity {
 		Intent share = new Intent(Intent.ACTION_SEND);
 		share.setType("image/jpeg");
 		share.putExtra(Intent.EXTRA_STREAM, uri);
-		startActivity(Intent.createChooser(share, "share using"));
+		startActivity(Intent.createChooser(share, "Share With..."));
 	}
 
 }

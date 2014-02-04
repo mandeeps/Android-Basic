@@ -17,40 +17,44 @@
         android:src="@raw/grumpy" />
 
     <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button3"
-        android:ems="10"
-        android:text="I Made an App Once." />
-    
-    <EditText
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:ems="10"
-        android:text=" It Was Awful." />
+        android:text=" It Was Awful." >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editText2"
+        android:layout_alignLeft="@+id/editText2"
+        android:ems="10"
+        android:text="I Made an App Once." />
 
     <Button
         android:id="@+id/button2"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText1"
-        android:layout_alignBottom="@+id/editText1"
-        android:layout_toRightOf="@+id/editText1"
-        android:onClick="writeText"
-        android:text="Write" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/imageView1"
+        android:onClick="shareMeme"
+        android:text="Share" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button1"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/button2"
-        android:onClick="shareMeme"
-        android:text="Share" />
+        android:layout_above="@+id/button2"
+        android:layout_alignRight="@+id/imageView1"
+        android:onClick="writeText"
+        android:text="Write" />
 
 </RelativeLayout>

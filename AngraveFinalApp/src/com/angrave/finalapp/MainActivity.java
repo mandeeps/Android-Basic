@@ -35,7 +35,6 @@ public class MainActivity extends Activity {
 		tp.setColor(Color.BLACK);
 		tp.setTextAlign(Align.CENTER);
 
-		
 		setContentView(R.layout.activity_main);
 	}
 
@@ -82,6 +81,7 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated catch block
 			return;
 		}
+
 		Uri uri = Uri.fromFile(file);
 		Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
 		intent.setData(uri);

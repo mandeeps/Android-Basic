@@ -59,6 +59,8 @@ public class MainActivity extends Activity {
 		
 		// Draw text several times because I don't know how
 		// to increase opacity of text shadowing to improve legibility
+		// Having black text with a white shadow makes it easier to read
+		//  
 		c.drawText(text1, c.getWidth()/2, 50, tp);
 		c.drawText(text2, c.getWidth()/2, bmp.getHeight() -20, tp);
 		c.drawText(text1, c.getWidth()/2, 50, tp);
@@ -70,6 +72,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void shareMeme(View view) throws IOException {
+		// Based on Angrave's example
 		File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 		path.mkdirs();
 		String filename = "GrumpyCat_" + System.currentTimeMillis() + ".jpg";

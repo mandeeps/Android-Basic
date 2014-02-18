@@ -30,6 +30,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		mPenguin = BitmapFactory.decodeResource(getResources(), R.drawable.penguin);
+		mPenguin = Bitmap.createScaledBitmap(mPenguin, 50, 50, true);
 		mBitmap = Bitmap.createBitmap(4,4,Bitmap.Config.ARGB_8888);
 		Canvas c = new Canvas(mBitmap);
 		paint = new Paint();
